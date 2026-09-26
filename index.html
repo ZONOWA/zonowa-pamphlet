@@ -371,6 +371,11 @@ footer .wrap {
 .scenes-v55 .scenes-v55-wide {
   min-height:0;
   overflow:visible;
+  width:min(calc(100% - 80px), 1100px);
+  margin:56px auto 0;
+}
+.scenes-v55 .scenes-v55-wide + .scenes-v55-wide {
+  margin-top:32px;
 }
 .scenes-v55 .scenes-v55-wide img {
   position:relative;
@@ -386,7 +391,14 @@ footer .wrap {
   .scenes-v55-stack { min-height:0; grid-template-rows:none; }
   .scenes-v55-stack .scene-still { min-height:48svh; }
   .scenes-v55-row2 .moment-card { min-height:52svh; }
-  .scenes-v55 .scenes-v55-wide { min-height:0; }
+  .scenes-v55 .scenes-v55-wide {
+    min-height:0;
+    width:min(calc(100% - 28px), 1100px);
+    margin-top:28px;
+  }
+  .scenes-v55 .scenes-v55-wide + .scenes-v55-wide {
+    margin-top:18px;
+  }
 }
 
 </style>
