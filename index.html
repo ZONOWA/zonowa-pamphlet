@@ -359,7 +359,7 @@ footer .wrap {
 }
 
 /* Ver.5.5: SCENES — video anchors with quieter still-photo rhythm */
-.scenes-v55 { padding:0; background:var(--paper); }
+.scenes-v55 { padding:0 0 80px; background:var(--paper); }
 .scenes-v55-row1 { display:grid; grid-template-columns:1fr 1fr; min-height:760px; }
 .scenes-v55-stack { display:grid; grid-template-rows:1fr 1fr; min-height:760px; }
 .scenes-v55-row2 { display:grid; grid-template-columns:1fr 1fr; min-height:560px; }
@@ -376,7 +376,6 @@ footer .wrap {
 }
 .scenes-v55 .scenes-v55-wide + .scenes-v55-wide {
   margin-top:32px;
-  margin-bottom:80px;
 }
 .scenes-v55 .scenes-v55-wide img {
   position:relative;
@@ -387,6 +386,7 @@ footer .wrap {
   display:block;
 }
 @media (max-width:760px) {
+  .scenes-v55 { padding-bottom:48px; }
   .scenes-v55-row1,.scenes-v55-row2 { grid-template-columns:1fr; min-height:0; }
   .scenes-v55-row1 > .moment-card { min-height:62svh; }
   .scenes-v55-stack { min-height:0; grid-template-rows:none; }
@@ -399,7 +399,6 @@ footer .wrap {
   }
   .scenes-v55 .scenes-v55-wide + .scenes-v55-wide {
     margin-top:18px;
-    margin-bottom:48px;
   }
 }
 
