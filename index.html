@@ -357,6 +357,27 @@ footer .wrap {
   .scene-side { grid-template-columns:1fr; }
   .scene-card { min-height:52svh; }
 }
+
+/* Ver.5.5: SCENES — video anchors with quieter still-photo rhythm */
+.scenes-v55 { padding:0; background:var(--paper); }
+.scenes-v55-row1 { display:grid; grid-template-columns:1fr 1fr; min-height:760px; }
+.scenes-v55-stack { display:grid; grid-template-rows:1fr 1fr; min-height:760px; }
+.scenes-v55-row2 { display:grid; grid-template-columns:1fr 1fr; min-height:560px; }
+.scenes-v55-wide { position:relative; min-height:620px; overflow:hidden; margin:0; }
+.scenes-v55 .moment-card,.scenes-v55 .scene-still { position:relative; min-height:0; overflow:hidden; margin:0; background:#d9d7c9; }
+.scenes-v55 video,.scenes-v55 img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.scenes-v55 .scene-label { position:absolute; left:24px; bottom:22px; z-index:2; padding:8px 11px; background:rgba(32,45,35,.78); color:#fff; font-size:10px; letter-spacing:.18em; text-transform:uppercase; }
+.scenes-v55 .scene-note { position:absolute; left:24px; right:24px; top:22px; z-index:2; color:#fff; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:clamp(16px,2vw,22px); line-height:1.55; text-shadow:0 1px 12px rgba(0,0,0,.42); }
+.scenes-v55 .scenes-v55-wide { min-height:620px; }
+@media (max-width:760px) {
+  .scenes-v55-row1,.scenes-v55-row2 { grid-template-columns:1fr; min-height:0; }
+  .scenes-v55-row1 > .moment-card { min-height:62svh; }
+  .scenes-v55-stack { min-height:0; grid-template-rows:none; }
+  .scenes-v55-stack .scene-still { min-height:48svh; }
+  .scenes-v55-row2 .moment-card { min-height:52svh; }
+  .scenes-v55 .scenes-v55-wide { min-height:58svh; }
+}
+
 </style>
 </head>
 <body>
@@ -407,12 +428,9 @@ footer .wrap {
       <h2>犬と人が、<br>お互いを知っていく場所。</h2>
     </div>
     <div class="intro-copy">
-      <p>犬をコントロールすることより、まず、その子を見てみること。
-        <br>環境を少し変えて、返ってくる反応をまた見ること。</p>
-      <p>私たちが犬を知るだけではなく、犬もまた、人やこの世界を知っていく。
-        <br>そのやりとりの中で、それぞれの暮らし方を探していきます。</p>
-      <p>遊んだり、探したり、休んだり。ときには立ち止まりながら。
-        <br>「今、できることはなんだろう？」を一緒に考えます。</p>
+      <p>犬をコントロールすることより、まず、その子を見てみること。環境を少し変えて、返ってくる反応をまた見ること。</p>
+      <p>私たちが犬を知るだけではなく、犬もまた、人やこの世界を知っていく。そのやりとりの中で、それぞれの暮らし方を探していきます。</p>
+      <p>遊んだり、探したり、休んだり。ときには立ち止まりながら。「今、できることはなんだろう？」を一緒に考えます。</p>
     </div>
   </div>
 </section>
@@ -433,50 +451,24 @@ footer .wrap {
   ✏️ 04 SCENES：写真・動画につける短い言葉
   画像・動画ファイル名は、慣れるまでは変更しなくてOKです。
 ================================================== -->
-<section class="life-scenes" aria-label="ZONOWAで流れる4つの時間">
-  <div class="moment-grid calm-grid">
-    <div class="moment-card play">
-      <video autoplay muted loop playsinline preload="metadata" poster="play_together_poster.jpg" aria-label="犬と人が合図を交わしながら一緒に動いて遊ぶ様子">
-        <source src="play_together.mp4" type="video/mp4">
-      </video>
+<section class="scenes-v55" aria-label="ZONOWAで流れる4つの時間">
+  <div class="scenes-v55-row1">
+    <div class="moment-card">
+      <video autoplay muted loop playsinline preload="metadata" poster="play_together_poster.jpg"><source src="play_together.mp4" type="video/mp4"></video>
       <div class="scene-note">一緒に動くことも、合図を交わすことも、遊びになる。</div>
       <div class="scene-label">PLAY / TOGETHER</div>
     </div>
-    <div class="moment-card explore">
-      <video autoplay muted loop playsinline preload="metadata" poster="play_dig_poster.jpg" aria-label="ひろっぱで夢中になって穴を掘り、環境を探索する犬">
-        <source src="play_dig.mp4" type="video/mp4">
-      </video>
-      <div class="scene-label">EXPLORE / HIROPPA</div>
+    <div class="scenes-v55-stack">
+      <figure class="scene-still"><img src="learn_together_still.jpg" alt=""><figcaption class="scene-label">LEARN / TOGETHER</figcaption></figure>
+      <figure class="scene-still"><img src="play_own_pace.jpg" alt=""><figcaption class="scene-label">PLAY / THEIR OWN PACE</figcaption></figure>
     </div>
-    <figure class="scene-still stay-still">
-      <img src="stay_window.jpg" alt="窓辺のベッドでゆったり過ごす犬">
-      <figcaption class="scene-label">STAY / JUST BEING</figcaption>
-    </figure>
   </div>
-
-  <div class="learn-breath" aria-label="学びと対話の風景">
-    <div class="moment-card learn">
-      <video autoplay muted loop playsinline preload="metadata" poster="learn_portl_poster.jpg" aria-label="PORTLで人同士が相手を見ながら試し考える様子">
-        <source src="learn_portl.mp4" type="video/mp4">
-      </video>
-      <div class="scene-label">LEARN / PORTL</div>
-    </div>
-    <figure class="scene-still learn-still">
-      <img src="learn_together_still.jpg" alt="犬たちもそばにいる屋外で人同士が話しながら過ごす風景">
-      <figcaption class="scene-label">LEARN / TOGETHER</figcaption>
-    </figure>
+  <div class="scenes-v55-row2">
+    <div class="moment-card"><video autoplay muted loop playsinline preload="metadata" poster="learn_portl_poster.jpg"><source src="learn_portl.mp4" type="video/mp4"></video><div class="scene-label">LEARN / PORTL</div></div>
+    <div class="moment-card"><video autoplay muted loop playsinline preload="metadata" poster="play_dig_poster.jpg"><source src="play_dig.mp4" type="video/mp4"></video><div class="scene-label">EXPLORE / HIROPPA</div></div>
   </div>
-
-  <div class="scene-stills quiet-stills" aria-label="歩くこと、探索することの風景">
-    <figure class="scene-still">
-      <img src="sea_walk.jpg" alt="海へ続く路地を犬と歩く風景">
-      <figcaption class="scene-label">WALK / EXPLORE</figcaption>
-    </figure>
-    <figure class="scene-still">
-      <img src="play_own_pace.jpg" alt="草の匂いを嗅ぎながら、自分のペースで楽しむ犬">
-      <figcaption class="scene-label">PLAY / THEIR OWN PACE</figcaption>
-    </figure>
-  </div>
+  <figure class="scene-still scenes-v55-wide"><img src="stay_window.jpg" alt=""><figcaption class="scene-label">STAY / JUST BEING</figcaption></figure>
+  <figure class="scene-still scenes-v55-wide"><img src="sea_walk.jpg" alt=""><figcaption class="scene-label">WALK / EXPLORE</figcaption></figure>
 </section>
 <!-- ==================================================
   ✏️ 05 KEY MESSAGE：写真横の大きなメッセージ
