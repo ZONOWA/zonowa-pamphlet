@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZONOWA | 小さなWebパンフレット prototype</title>
+<meta name="description" content="犬との暮らしは、「きみ」との会話を知っていく旅。ZONOWAの世界観を伝えるWebパンフレットの試作です。">
+<style>
+:root {
+  --paper:#f3efe6;
+  --paper2:#e7e0d2;
+  --ink:#293029;
+  --moss:#5e6e55;
+  --forest:#39483b;
+  --clay:#aa7d52;
+  --sun:#c7a85b;
+  --line:rgba(41,48,41,.18);
+  --max:1120px;
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  color:var(--ink);
+  background:var(--paper);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  line-height:1.95;
+  letter-spacing:.04em;
+}
+a { color:inherit; }
+.wrap { width:min(calc(100% - 40px), var(--max)); margin:auto; }
+
+nav {
+  position:absolute; z-index:3; inset:0 0 auto;
+  padding:24px 0;
+  color:white;
+}
+.nav-inner { display:flex; justify-content:space-between; align-items:center; }
+.logo { font-size:20px; font-weight:800; letter-spacing:.14em; }
+.nav-note { font-size:11px; letter-spacing:.15em; opacity:.88; }
+
+.hero {
+  min-height:92svh;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  color:white;
+  overflow:hidden;
+}
+.hero::before {
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(to top, rgba(21,29,22,.72) 0%, rgba(21,29,22,.12) 58%, rgba(21,29,22,.18) 100%),
+    url("assets/hero.jpg");
+  background-size:cover;
+  background-position:center 64%;
+  transform:scale(1.015);
+}
+.hero-content {
+  position:relative; z-index:2;
+  padding:0 0 9vh;
+  max-width:800px;
+}
+.eyebrow {
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.24em;
+  margin-bottom:18px;
+  opacity:.9;
+}
+h1 {
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:clamp(36px,7vw,76px);
+  font-weight:500;
+  line-height:1.35;
+  letter-spacing:.06em;
+  margin:0 0 22px;
+}
+.hero p {
+  max-width:560px;
+  margin:0;
+  font-size:clamp(14px,2vw,17px);
+}
+
+section { padding:100px 0; }
+.intro {
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:80px;
+  align-items:start;
+}
+.kicker {
+  color:var(--moss);
+  font-size:12px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+.intro h2,.section-title {
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+  font-weight:500;
+  line-height:1.55;
+}
+.intro h2 { font-size:clamp(28px,4vw,48px); margin:12px 0 0; }
+.intro-copy { font-size:16px; }
+.intro-copy p { margin:0 0 1.5em; }
+
+.camp-strip {
+  background:var(--forest);
+  color:#f7f2e8;
+  padding:70px 0;
+}
+.camp-strip .wrap {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+}
+.camp-item {
+  min-height:190px;
+  padding:18px 26px 20px;
+  border-left:1px solid rgba(255,255,255,.2);
+}
+.camp-item:last-child { border-right:1px solid rgba(255,255,255,.2); }
+.camp-item b {
+  display:block;
+  font-family:Georgia,serif;
+  font-weight:400;
+  font-size:26px;
+  letter-spacing:.06em;
+  margin-bottom:22px;
+}
+.camp-item span { font-size:13px; opacity:.86; }
+
+.photo-story {
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  min-height:680px;
+  background:var(--paper2);
+}
+.photo-story .photo {
+  min-height:560px;
+  background:url("assets/photo_story.jpg") center/cover no-repeat;
+}
+.photo-story .text {
+  padding:90px clamp(36px,8vw,110px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.photo-story h3 {
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:clamp(30px,4.5vw,55px);
+  line-height:1.5;
+  font-weight:500;
+  margin:10px 0 30px;
+}
+.photo-story p { max-width:470px; margin:0; }
+
+.values {
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:80px;
+}
+.values-list {
+  border-top:1px solid var(--line);
+}
+.value {
+  display:grid;
+  grid-template-columns:90px 1fr;
+  gap:24px;
+  padding:28px 0;
+  border-bottom:1px solid var(--line);
+}
+.value-num {
+  font-family:Georgia,serif;
+  font-size:14px;
+  color:var(--clay);
+}
+.value strong {
+  display:block;
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+  font-weight:500;
+  font-size:22px;
+  margin-bottom:8px;
+}
+.value p { margin:0; font-size:14px; color:#4b524b; }
+
+.quote {
+  padding:110px 0;
+  text-align:center;
+  background:#d8d0c0;
+}
+.quote p {
+  margin:0 auto;
+  max-width:820px;
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:clamp(25px,4.3vw,48px);
+  line-height:1.7;
+}
+.quote small {
+  display:block;
+  margin-top:30px;
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.cta {
+  padding:110px 0 90px;
+}
+.cta-box {
+  display:flex;
+  justify-content:space-between;
+  gap:40px;
+  align-items:flex-end;
+  border-top:1px solid var(--line);
+  padding-top:42px;
+}
+.cta h2 {
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:clamp(30px,5vw,60px);
+  font-weight:500;
+  margin:0;
+  line-height:1.4;
+}
+.button {
+  display:inline-flex;
+  align-items:center;
+  gap:24px;
+  text-decoration:none;
+  border:1px solid var(--ink);
+  padding:17px 24px;
+  font-size:13px;
+  letter-spacing:.08em;
+  white-space:nowrap;
+}
+.button::after { content:"→"; font-size:18px; }
+footer {
+  padding:0 0 40px;
+  font-size:11px;
+  color:#687068;
+}
+footer .wrap {
+  display:flex;
+  justify-content:space-between;
+  border-top:1px solid var(--line);
+  padding-top:20px;
+}
+
+
+
+.life-scenes { padding:0; background:var(--paper); }
+.moment-grid {
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  grid-template-rows:360px 360px;
+  min-height:720px;
+}
+.moment-card { position:relative; overflow:hidden; background:#d9d7c9; }
+.moment-card.play { grid-row:1 / 3; }
+.learn-duo { display:grid; grid-template-columns:1fr 1fr; min-height:360px; }
+.learn-duo .moment-card { min-height:360px; }
+.moment-card video { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+.moment-card .scene-label,
+.scene-still .scene-label {
+  position:absolute; left:24px; bottom:22px;
+  padding:8px 11px; background:rgba(32,45,35,.78); color:#fff;
+  font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+}
+.moment-card .scene-note {
+  position:absolute; left:24px; right:24px; top:22px; color:#fff;
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:clamp(16px,2vw,22px); line-height:1.55;
+  text-shadow:0 1px 12px rgba(0,0,0,.42);
+}
+.moment-pair { display:grid; grid-template-columns:1fr 1fr; min-height:360px; }
+.scene-stills { display:grid; grid-template-columns:1fr 1fr; min-height:300px; }
+.scene-still { position:relative; overflow:hidden; min-height:300px; }
+.scene-still img { width:100%; height:100%; object-fit:cover; display:block; }
+.cta-actions { display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end; }
+.button.secondary { border-color:#6f766e; color:#445047; }
+.welcome-photo {
+  margin-top:34px;
+  aspect-ratio:1 / 1;
+  overflow:hidden;
+}
+.welcome-photo img {
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+
+.welcome { background:#ebe5d8; }
+.welcome-inner { display:grid; grid-template-columns:.9fr 1.1fr; gap:80px; align-items:start; }
+.welcome-copy p { margin:0 0 .7em; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:clamp(18px,2.5vw,26px); }
+.welcome-copy .return-note { margin-top:38px; padding-top:28px; border-top:1px solid var(--line); font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif; font-size:14px; color:#505850; }
+
+
+/* Ver.5.3: a small human presence, without turning this into a resume */
+.profile { background:#f4f0e7; }
+.profile-inner { display:grid; grid-template-columns:1.05fr .95fr; gap:72px; align-items:center; }
+.profile-photo { aspect-ratio:4 / 3; overflow:hidden; }
+.profile-photo img { width:100%; height:100%; object-fit:cover; object-position:center 48%; display:block; }
+.profile-copy { max-width:560px; }
+.profile-copy h2 { margin:0 0 28px; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:clamp(28px,4vw,48px); font-weight:400; line-height:1.35; }
+.profile-copy p { margin:0 0 1em; font-size:14px; line-height:2; color:#465047; }
+.profile-meta { margin-top:28px !important; padding-top:22px; border-top:1px solid var(--line); font-size:11px !important; letter-spacing:.08em; color:#6a716a !important; }
+@media (max-width:760px) {
+  .profile-inner { grid-template-columns:1fr; gap:34px; }
+  .profile-photo { aspect-ratio:4 / 3; }
+}
+
+/* Ver.5.2: fewer moving images, more breathing room */
+.calm-grid { grid-template-columns:1.12fr .88fr; grid-template-rows:360px 360px; }
+.calm-grid .stay-still { min-height:360px; }
+.learn-breath { display:grid; grid-template-columns:1.05fr .95fr; min-height:420px; }
+.learn-breath .moment-card, .learn-breath .scene-still { min-height:420px; }
+.quiet-stills { min-height:280px; }
+.quiet-stills .scene-still { min-height:280px; }
+@media (max-width:760px) {
+  .wrap { width:min(calc(100% - 28px), var(--max)); }
+  nav { padding-top:18px; }
+  .nav-note { display:none; }
+  .hero { min-height:86svh; }
+  .hero-content { padding-bottom:8vh; }
+  section { padding:72px 0; }
+  .intro,.values,.welcome-inner { grid-template-columns:1fr; gap:34px; }
+  .camp-strip .wrap { grid-template-columns:1fr 1fr; }
+  .camp-item:nth-child(3) { border-top:1px solid rgba(255,255,255,.2); }
+  .moment-grid { grid-template-columns:1fr; grid-template-rows:auto; min-height:0; }
+  .moment-card.play { grid-row:auto; min-height:62svh; }
+  .moment-card.explore { min-height:52svh; }
+  .moment-pair { grid-template-columns:1fr; min-height:0; }
+  .moment-pair .moment-card { min-height:44svh; }
+  .learn-duo { grid-template-columns:1fr; min-height:0; }
+  .learn-duo .moment-card { min-height:44svh; }
+  .scene-stills { grid-template-columns:1fr; }
+  .scene-still { min-height:46svh; }
+  .cta-actions { justify-content:flex-start; }
+  .camp-item:nth-child(4) { border-top:1px solid rgba(255,255,255,.2); }
+  .photo-story { grid-template-columns:1fr; }
+  .scene-grid { grid-template-columns:1fr; min-height:0; }
+  .scene-video { min-height:62svh; }
+  .scene-side { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+  .scene-card { min-height:280px; }
+  .photo-story .photo { min-height:55svh; }
+  .photo-story .text { padding:62px 24px 70px; }
+  .value { grid-template-columns:56px 1fr; gap:12px; }
+  .cta-box { align-items:flex-start; flex-direction:column; }
+  footer .wrap { gap:16px; flex-direction:column; }
+}
+@media (max-width:760px) {
+  .calm-grid { grid-template-columns:1fr; grid-template-rows:auto; }
+  .calm-grid .stay-still { min-height:52svh; }
+  .learn-breath { grid-template-columns:1fr; min-height:0; }
+  .learn-breath .moment-card, .learn-breath .scene-still { min-height:48svh; }
+}
+@media (max-width:520px) {
+  .scene-side { grid-template-columns:1fr; }
+  .scene-card { min-height:52svh; }
+}
+</style>
+</head>
+<body>
+<!--
+  ============================================================
+  ZONOWA Web Pamphlet Ver.5.4 / GitHub edit-friendly version
+
+  ★文章だけ直したいとき
+  下へスクロールして「✏️ 01」〜「✏️ 10」を探してください。
+  <br> = 改行です。消すと改行がなくなります。
+  <p> ... </p> = ひとまとまりの段落です。
+
+  ★基本的に触らなくていいもの
+  class= / src= / href= / style / CSS / video の記述
+
+  詳しくは EDIT_GUIDE.md を見てください。
+  ============================================================
+-->
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">ZONOWA</div>
+    <div class="nav-note">DOGS, PEOPLE & THEIR OWN PACE</div>
+  </div>
+</nav>
+
+<!-- ==================================================
+  ✏️ 01 HERO：トップの言葉
+  文章を直すときは、この HERO の範囲だけ触ればOKです。
+  <br> は「ここで改行」の意味です。
+================================================== -->
+<header class="hero">
+  <div class="wrap hero-content">
+    <div class="eyebrow">A quiet place to know each other</div>
+    <h1>犬との暮らしは、<br>「きみ」との会話を<br>知っていく旅。</h1>
+    <p>急がなくていい。正解をひとつに決めなくていい。<br>
+    見ること、試すこと、休むこと。そこから始まる会話があります。</p>
+  </div>
+</header>
+
+<!-- ==================================================
+  ✏️ 02 ABOUT ZONOWA：ZONOWAの紹介文
+================================================== -->
+<section>
+  <div class="wrap intro">
+    <div>
+      <div class="kicker">About ZONOWA</div>
+      <h2>犬と人が、<br>お互いを知っていく場所。</h2>
+    </div>
+    <div class="intro-copy">
+      <p>犬をコントロールすることより、まず、その子を見てみること。環境を少し変えて、返ってくる反応をまた見ること。</p>
+      <p>私たちが犬を知るだけではなく、犬もまた、人やこの世界を知っていく。そのやりとりの中で、それぞれの暮らし方を探していきます。</p>
+      <p>遊んだり、探したり、休んだり。ときには立ち止まりながら。「今、できることはなんだろう？」を一緒に考えます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================
+  ✏️ 03 PLAY / EXPLORE / STAY / LEARN：4つの紹介文
+================================================== -->
+<div class="camp-strip">
+  <div class="wrap">
+    <div class="camp-item"><b>PLAY</b><span>ひろっぱ・ZO SUN ROOM。遊んだり、休んだり、それぞれの過ごし方を。</span></div>
+    <div class="camp-item"><b>EXPLORE</b><span>ノーズワークや散歩。鼻や身体を使って、犬が世界を知っていく時間。</span></div>
+    <div class="camp-item"><b>STAY</b><span>お預かり。「預ける」だけではなく、その子らしく過ごせる時間を探します。</span></div>
+    <div class="camp-item"><b>LEARN</b><span>出張サポート・ワークショップ。観察し、試し、また見るための学びと対話。</span></div>
+  </div>
+</div>
+
+<!-- ==================================================
+  ✏️ 04 SCENES：写真・動画につける短い言葉
+  画像・動画ファイル名は、慣れるまでは変更しなくてOKです。
+================================================== -->
+<section class="life-scenes" aria-label="ZONOWAで流れる4つの時間">
+  <div class="moment-grid calm-grid">
+    <div class="moment-card play">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/play_together_poster.jpg" aria-label="犬と人が合図を交わしながら一緒に動いて遊ぶ様子">
+        <source src="assets/play_together.mp4" type="video/mp4">
+      </video>
+      <div class="scene-note">一緒に動くことも、合図を交わすことも、遊びになる。</div>
+      <div class="scene-label">PLAY / TOGETHER</div>
+    </div>
+    <div class="moment-card explore">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/play_dig_poster.jpg" aria-label="ひろっぱで夢中になって穴を掘り、環境を探索する犬">
+        <source src="assets/play_dig.mp4" type="video/mp4">
+      </video>
+      <div class="scene-label">EXPLORE / HIROPPA</div>
+    </div>
+    <figure class="scene-still stay-still">
+      <img src="assets/stay_window.jpg" alt="窓辺のベッドでゆったり過ごす犬">
+      <figcaption class="scene-label">STAY / JUST BEING</figcaption>
+    </figure>
+  </div>
+
+  <div class="learn-breath" aria-label="学びと対話の風景">
+    <div class="moment-card learn">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/learn_portl_poster.jpg" aria-label="PORTLで人同士が相手を見ながら試し考える様子">
+        <source src="assets/learn_portl.mp4" type="video/mp4">
+      </video>
+      <div class="scene-label">LEARN / PORTL</div>
+    </div>
+    <figure class="scene-still learn-still">
+      <img src="assets/learn_together_still.jpg" alt="犬たちもそばにいる屋外で人同士が話しながら過ごす風景">
+      <figcaption class="scene-label">LEARN / TOGETHER</figcaption>
+    </figure>
+  </div>
+
+  <div class="scene-stills quiet-stills" aria-label="歩くこと、探索することの風景">
+    <figure class="scene-still">
+      <img src="assets/sea_walk.jpg" alt="海へ続く路地を犬と歩く風景">
+      <figcaption class="scene-label">WALK / EXPLORE</figcaption>
+    </figure>
+    <figure class="scene-still">
+      <img src="assets/play_own_pace.jpg" alt="草の匂いを嗅ぎながら、自分のペースで楽しむ犬">
+      <figcaption class="scene-label">PLAY / THEIR OWN PACE</figcaption>
+    </figure>
+  </div>
+</section>
+<!-- ==================================================
+  ✏️ 05 KEY MESSAGE：写真横の大きなメッセージ
+  ★今回変更した「したい！／できた」の文章はここです。
+================================================== -->
+<div class="photo-story">
+  <div class="photo" role="img" aria-label="花のそばでくつろぐ犬"></div>
+  <div class="text">
+    <div class="kicker">Not a perfect dog</div>
+    <h3>その子の「したい！」から始まる。<br>その子なりの「できた」を、一緒に見つける。</h3>
+    <p>嬉しい、怖い、迷う、やめたい。犬の行動は、その子から届く情報のひとつ。うまくいかない日も含めて、そこにあるものを受け取りながら次の提案を考えます。</p>
+  </div>
+</div>
+
+<!-- ==================================================
+  ✏️ 06 WHAT WE VALUE：見る→提案→返事→また考える
+================================================== -->
+<section>
+  <div class="wrap values">
+    <div>
+      <div class="kicker">What we value</div>
+      <h2 class="section-title">犬と人のあいだに、<br>会話が育つこと。</h2>
+    </div>
+    <div class="values-list">
+      <div class="value">
+        <div class="value-num">01</div>
+        <div><strong>見る</strong><p>決めつける前に、その子が今どうしているのかを見る。</p></div>
+      </div>
+      <div class="value">
+        <div class="value-num">02</div>
+        <div><strong>提案する</strong><p>距離、場所、遊び、休憩。ひとつではない選択肢をつくる。</p></div>
+      </div>
+      <div class="value">
+        <div class="value-num">03</div>
+        <div><strong>返事を受け取る</strong><p>YESもNOも、迷っていることも。次の会話につながる情報として受け取る。</p></div>
+      </div>
+      <div class="value">
+        <div class="value-num">04</div>
+        <div><strong>また考える</strong><p>目の前の「きみ」は変わっていく。だから方法も一緒に変えていく。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================================================
+  ✏️ 07 PROFILE：藤原プロフィール
+================================================== -->
+<section class="profile" aria-label="ZONOWAをやっている人">
+  <div class="wrap profile-inner">
+    <div class="profile-photo">
+      <img src="assets/profile_together.jpg" alt="犬と見つめ合いながら一緒に過ごす藤原">
+    </div>
+    <div class="profile-copy">
+      <div class="kicker">Who’s here</div>
+      <h2>ZONOWAをやっている、<br>藤原です。</h2>
+      <p>犬を観察するのが好きです。<br>「なんで今それをしたんだろう？」と考えるのも、犬から返ってきた答えを見て、また別の方法を試してみるのも好きです。</p>
+      <p>トレーナーとして何かを教えるだけではなく、犬と人のあいだで起きていることを一緒に眺めながら、「じゃあ、次はどうしてみよう？」を考えています。</p>
+      <p class="profile-meta">PA認定1級 / caawtメンバー</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================
+  ✏️ 08 FOR FIRST-TIME VISITORS：初めての方へ
+================================================== -->
+<section class="welcome">
+  <div class="wrap welcome-inner">
+    <div>
+      <div class="kicker">For first-time visitors</div>
+      <h2 class="section-title">初めての方へ</h2>
+      <div class="welcome-photo">
+        <img src="assets/coffee_together.jpg" alt="コーヒーを手に、犬たちと同じ時間を過ごす風景">
+      </div>
+    </div>
+    <div class="welcome-copy">
+      <p>犬の「楽しい」を増やしたい。<br>「安心」を増やしたい。</p>
+
+      <p>そのために、<br>私たちも犬から教えてもらいます。</p>
+
+      <p>「これ、好きなんだ」<br>
+      「これはちょっと苦手なんだ」<br>
+      「こんなこともできるんだ」</p>
+
+      <p>知るたびに、<br>人にもできることが増えていく。</p>
+
+      <p>「じゃあ、こんなのはどう？」<br>
+      と、また犬に聞いてみる。</p>
+
+      <p>そうやって犬の世界が広がることが、<br>
+      人にとっても楽しいものになったらいい。</p>
+
+      <p class="return-note">ZONOWAが、<br>
+      そんな犬と人のやりとりを<br>
+      一緒に見つけていける場所に。<br><br>
+      あなたと犬たちにとって、<br>
+      楽しいや安心が増えていく場所のひとつに<br>
+      なりますように。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================
+  ✏️ 09 QUOTE：締めの言葉
+================================================== -->
+<div class="quote">
+  <div class="wrap">
+    <p>完璧よりも、<br>息の合った漫才を。</p>
+    <small>ZONOWA / OKAYAMA</small>
+  </div>
+</div>
+
+<!-- ==================================================
+  ✏️ 10 CTA：メニュー／LINEへのボタン
+  URLを変える必要がない限り href= は触らなくてOKです。
+================================================== -->
+<section class="cta">
+  <div class="wrap cta-box">
+    <div>
+      <div class="kicker">Menu &amp; Price</div>
+      <h2>メニューや料金を、<br>もう少し詳しく。</h2>
+    </div>
+    <div class="cta-actions">
+      <a class="button" href="https://zonowa-dog.com" target="_blank" rel="noopener">メニュー・料金を見る</a>
+      <a class="button secondary" href="https://lin.ee/SURbWck" target="_blank" rel="noopener">相談・お問い合わせ</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© ZONOWA DOG TRAINING</div>
+    <div>WEB PAMPHLET / OKAYAMA</div>
+  </div>
+</footer>
+</body>
+</html>
