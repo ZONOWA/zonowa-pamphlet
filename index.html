@@ -368,14 +368,25 @@ footer .wrap {
 .scenes-v55 video,.scenes-v55 img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
 .scenes-v55 .scene-label { position:absolute; left:24px; bottom:22px; z-index:2; padding:8px 11px; background:rgba(32,45,35,.78); color:#fff; font-size:10px; letter-spacing:.18em; text-transform:uppercase; }
 .scenes-v55 .scene-note { position:absolute; left:24px; right:24px; top:22px; z-index:2; color:#fff; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:clamp(16px,2vw,22px); line-height:1.55; text-shadow:0 1px 12px rgba(0,0,0,.42); }
-.scenes-v55 .scenes-v55-wide { min-height:620px; }
+.scenes-v55 .scenes-v55-wide {
+  min-height:0;
+  overflow:visible;
+}
+.scenes-v55 .scenes-v55-wide img {
+  position:relative;
+  inset:auto;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  display:block;
+}
 @media (max-width:760px) {
   .scenes-v55-row1,.scenes-v55-row2 { grid-template-columns:1fr; min-height:0; }
   .scenes-v55-row1 > .moment-card { min-height:62svh; }
   .scenes-v55-stack { min-height:0; grid-template-rows:none; }
   .scenes-v55-stack .scene-still { min-height:48svh; }
   .scenes-v55-row2 .moment-card { min-height:52svh; }
-  .scenes-v55 .scenes-v55-wide { min-height:58svh; }
+  .scenes-v55 .scenes-v55-wide { min-height:0; }
 }
 
 </style>
